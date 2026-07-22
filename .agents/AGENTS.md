@@ -47,7 +47,14 @@
 6. **Preguntas Frecuentes (FAQs):** Enfoque en Pago Único sin mensualidades.
 7. **Trust Factor & Legal Footer:** Datos de contacto `partners@thequantpartners.com` y Disclaimer legal completo.
 
+## Estado del Ecosistema de SOPs (Guardados en `docs/` local)
+- `SOP-QP-001`: Creación de Micro-servicios / Landings (Completado).
+- `SOP-QP-002`: Creación y Lanzamiento de TikTok Ads & Events API (Completado - Developer App en aprobación).
+- `SOP-QP-003`: Producción de Creativos Verticales con IA (Completado).
+- `SOP-QP-004`: Atención al Cliente y Reembolsos por Correo (Completado).
+- `SOP-QP-005`: Control de Métricas, CPA y Reglas de Escalamiento (Completado).
+
 ## Reglas Operativas y de Control Git
 - **Confirmación Obligatoria de Push:** SIEMPRE preguntar y solicitar autorización explícita al usuario ANTES de ejecutar `git push`.
+- **Protección de SOPs y Credenciales:** La carpeta `docs/` y archivos `.env.local` son estrictamente locales y están ignorados en `.gitignore`.
 - **Metodología de Creación de SOPs:** 1. **Pensar** (Estrategia y Alineación) ➔ 2. **Ejecutar** (Código, Integraciones y Pruebas) ➔ 3. **Documentar** (Redacción del SOP oficial verificado).
-

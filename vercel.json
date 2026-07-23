@@ -1,0 +1,5 @@
+{
+  "buildCommand": "npm run build --workspace=apps/landing",
+  "outputDirectory": "apps/landing/dist",
+  "framework": "vite"
+}

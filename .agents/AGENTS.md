@@ -3,6 +3,8 @@
 ## Arquitectura (Monolito Modularizado)
 - **Framework:** NPM Workspaces Monorepo.
 - **Frontend (Landing):** `apps/landing` (Vite + React). Hospedado en Vercel.
+- **Repositorio Git Remote:** `https://github.com/Herreras-Pro/Whatsapp-ventas-pdf.git`
+- **Despliegue Vercel:** Orquestado automáticamente mediante `vercel.json` en la raíz (`npm run build --workspace=apps/landing`).
 - **Backend/Dashboard:** Carpetas preparadas en `apps/backend` y `apps/dashboard` para futuras expansiones.
 
 ## Embudo de Ventas (Funnel) - 100% Pago Único (Sin Suscripciones)
@@ -50,7 +52,7 @@
 ## Estado del Ecosistema de SOPs (Guardados en `docs/` local)
 - `SOP-QP-001`: Creación de Micro-servicios / Landings (Completado).
 - `SOP-QP-002`: Creación y Lanzamiento de TikTok Ads & Events API (Completado - Developer App en aprobación).
-- `SOP-QP-003`: Producción de Creativos Verticales con IA (Completado).
+- `SOP-QP-003`: Producción de Creativos Verticales Cinemáticos de 10s con IA y TikTok Symphony v2.1 (Completado).
 - `SOP-QP-004`: Atención al Cliente y Reembolsos por Correo (Completado).
 - `SOP-QP-005`: Control de Métricas, CPA y Reglas de Escalamiento (Completado).
 

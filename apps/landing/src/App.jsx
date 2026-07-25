@@ -16,12 +16,240 @@ const trackTikTokEvent = (eventName, params = {}) => {
   }
 };
 
+// === COMPONENTE WIDGET LIVE SALES (SOCIAL PROOF TOAST EN VIVO) ===
+const RECENT_SALES = [
+  { name: "Luis Fernández", city: "Sullana", product: "Bóveda Maestra", price: "S/ 29", time: "hace 2 min", avatar: "👨" },
+  { name: "María Luz Quispe", city: "Arequipa", product: "Bóveda + Cobertura VIP", price: "S/ 39", time: "hace 4 min", avatar: "👩" },
+  { name: "Carlos Mendoza", city: "Trujillo", product: "Bóveda Maestra", price: "S/ 29", time: "hace 6 min", avatar: "👨‍💼" },
+  { name: "Rosa María Vásquez", city: "Lima", product: "Bóveda + Cobertura VIP", price: "S/ 39", time: "hace 9 min", avatar: "👩‍💼" },
+  { name: "Jorge Huamán", city: "Chiclayo", product: "Bóveda Maestra", price: "S/ 29", time: "hace 11 min", avatar: "🧑" },
+  { name: "Ana Paula Silva", city: "Cusco", product: "Bóveda + Cobertura VIP", price: "S/ 39", time: "hace 14 min", avatar: "👩‍🌾" },
+  { name: "Diego Benavides", city: "Piura", product: "Bóveda Maestra", price: "S/ 29", time: "hace 18 min", avatar: "👨‍💻" },
+];
+
+function LiveSalesNotification() {
+  const [currentSaleIndex, setCurrentSaleIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    const hideTimer = setTimeout(() => {
+      setIsVisible(false);
+      const showTimer = setTimeout(() => {
+        setCurrentSaleIndex((prev) => (prev + 1) % RECENT_SALES.length);
+        setIsVisible(true);
+      }, 7000);
+      return () => clearTimeout(showTimer);
+    }, 5500);
+
+    return () => clearTimeout(hideTimer);
+  }, [isVisible, currentSaleIndex]);
+
+  if (!isVisible) return null;
+
+  const sale = RECENT_SALES[currentSaleIndex];
+
+  return (
+    <div className="live-sales-toast shadow-2xl animate-slide-up">
+      <button className="toast-close" onClick={() => setIsVisible(false)} title="Cerrar">✕</button>
+      <div className="toast-avatar-box">{sale.avatar}</div>
+      <div className="toast-body">
+        <div className="toast-header-line">
+          <strong className="toast-name">{sale.name}</strong>
+          <span className="toast-dot">•</span>
+          <span className="toast-city">{sale.city}</span>
+        </div>
+        <p className="toast-action">
+          acaba de comprar la <strong className="toast-prod">{sale.product}</strong> <span className="toast-tag">{sale.price}</span>
+        </p>
+        <div className="toast-footer-line">
+          <span className="toast-badge">✔ Verificado</span>
+          <span className="toast-dot">•</span>
+          <span className="toast-time">{sale.time}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// === COMPONENTE COUNTDOWN TIMER ===
+function CountdownTimer({ timeLeft }) {
+  const format = (n) => (n < 10 ? `0${n}` : n);
+
+  return (
+    <div className="countdown-card">
+      <span className="countdown-title">⚡ LA OFERTA EXPIRA EN:</span>
+      <div className="countdown-grid">
+        <div className="time-block">
+          <span className="time-num">{format(timeLeft.hours)}</span>
+          <span className="time-lbl">HORAS</span>
+        </div>
+        <span className="time-sep">:</span>
+        <div className="time-block">
+          <span className="time-num">{format(timeLeft.minutes)}</span>
+          <span className="time-lbl">MIN</span>
+        </div>
+        <span className="time-sep">:</span>
+        <div className="time-block">
+          <span className="time-num">{format(timeLeft.seconds)}</span>
+          <span className="time-lbl">SEG</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// === COMPONENTE STICKY HEADER TIMER (DESAPARECE SOLO MIENTRAS LA BARRA ROJA ESTÁ EN PANTALLA) ===
+function StickyTopHeaderTimer({ timeLeft }) {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isUrgencyBarVisible, setIsUrgencyBarVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 280) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    // Observar exactamente la barra roja de urgencia
+    const urgencyEl = document.querySelector('.urgency-bar-container');
+    if (!urgencyEl) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsUrgencyBarVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(urgencyEl);
+    return () => observer.disconnect();
+  }, []);
+
+  const format = (n) => (n < 10 ? `0${n}` : n);
+
+  // Muestra la barra negra cuando hay scroll Y la barra roja NO está visible en la pantalla
+  if (!isScrolled || isUrgencyBarVisible) return null;
+
+  const scrollToCheckout = (e) => {
+    e.preventDefault();
+    document.getElementById('checkout-section')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <div className="sticky-top-timer-bar">
+      <div className="sticky-timer-content">
+        <div className="sticky-timer-left">
+          <span className="sticky-fire">🔥</span>
+          <span className="sticky-title">OFERTA 90% OFF · Expira en:</span>
+          <div className="sticky-digits-box">
+            {format(timeLeft.hours)}:{format(timeLeft.minutes)}:{format(timeLeft.seconds)}
+          </div>
+        </div>
+        <button onClick={scrollToCheckout} className="sticky-buy-btn">
+          <span className="btn-desktop-text">OBTENER POR S/ 29.00</span>
+          <span className="btn-mobile-text">COMPRAR S/ 29</span>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// === COMPONENTE TEST / QUIZ DE DIAGNÓSTICO DE CIERRE ===
+function QuizSection() {
+  const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState([]);
+  const [isFinished, setIsFinished] = useState(false);
+
+  const questions = [
+    {
+      q: "¿Cuántos prospectos te escriben al día por WhatsApp preguntando por tu producto?",
+      options: ["1 a 5 mensajes al día", "6 a 20 mensajes al día", "Más de 20 mensajes al día"]
+    },
+    {
+      q: "¿Qué respuesta recibes con mayor frecuencia al enviar el precio?",
+      options: ["El 70% o más me clavan el VISTO", "Me piden descuentos o dicen 'está caro'", "Cierro rápido la mayoría"]
+    },
+    {
+      q: "¿Cuánto dinero estimas que pierdes al mes por clientes que no responden?",
+      options: ["S/ 300 a S/ 800 al mes", "S/ 800 a S/ 2,500 al mes", "Más de S/ 2,500 al mes"]
+    }
+  ];
+
+  const handleSelect = (option) => {
+    setAnswers([...answers, option]);
+    if (step < questions.length - 1) {
+      setStep(step + 1);
+    } else {
+      setIsFinished(true);
+    }
+  };
+
+  const scrollToCheckout = (e) => {
+    e.preventDefault();
+    document.getElementById('checkout-section')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <section className="quiz-section-wrapper">
+      <div className="container">
+        <div className="quiz-card">
+          <div className="quiz-header-badge">📋 DIAGNÓSTICO RÁPIDO EN 60 SEGUNDOS</div>
+          <h2>Descubre tu Nivel de Pérdida de Ventas en WhatsApp</h2>
+          <p className="quiz-intro">Responde 3 preguntas sencillas y calcula cuánto dinero estás dejando ir hacia tu competencia.</p>
+
+          {!isFinished ? (
+            <div className="quiz-body">
+              <div className="quiz-progress-track">
+                <div className="quiz-progress-fill" style={{ width: `${((step + 1) / questions.length) * 100}%` }}></div>
+              </div>
+              <p className="quiz-step-lbl">Pregunta {step + 1} de {questions.length}</p>
+              <h3 className="quiz-q-title">{questions[step].q}</h3>
+              <div className="quiz-btn-group">
+                {questions[step].options.map((opt, idx) => (
+                  <button key={idx} className="quiz-opt-btn" onClick={() => handleSelect(opt)}>
+                    {opt}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="quiz-result-box">
+              <div className="result-alert-icon">🚨</div>
+              <h3>Diagnóstico: Fuga Crítica de Ventas por Falta de Guiones Anti-Visto</h3>
+              <p>Tu producto es excelente, pero la falta de una secuencia estructurada de objeciones te está costando más del 65% de tu facturación mensual.</p>
+              <button onClick={scrollToCheckout} className="cta-button pulse-btn" style={{ marginTop: '1.25rem' }}>
+                SOLUCIONAR MI FUGA DE VENTAS HOY (S/ 29)
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // === PÁGINAS DE ACCESO FINAL ===
 function AccesoBasicoPage() {
   const driveFolderLink = "https://drive.google.com/drive/folders/1PztWxFEP34uqBJe2gamIIwiEaJMU1jiA?usp=sharing";
   
   useEffect(() => {
-    // Seguridad básica: Verificar si viene con el token interno
     if (!window.location.search.includes("auth=qp_secure")) {
       window.location.href = "/";
     }
@@ -59,7 +287,6 @@ function AccesoPremiumPage() {
   const upsellFileLink = "https://drive.google.com/file/d/1EWs1vPgvuq-2v_wO2BIZ1Zskal6UyTPa/view?usp=sharing";
   
   useEffect(() => {
-    // Seguridad básica: Verificar si viene de Mercado Pago (tiene parámetros en la URL)
     if (window.location.search.length < 5) {
       window.location.href = "/";
     }
@@ -101,13 +328,11 @@ function AccesoPremiumPage() {
 // === PÁGINA DE GRACIAS Y UPSELL (OTO) ===
 function GraciasPage() {
   useEffect(() => {
-    // Seguridad básica: Verificar si viene de Mercado Pago (tiene parámetros en la URL)
     if (window.location.search.length < 5) {
       window.location.href = "/";
     }
   }, []);
 
-  // Link de Mercado Pago para el Upsell (S/ 67)
   const handleUpsellPurchase = (e) => {
     e.preventDefault();
     window.location.href = MP_LINKS.UPSELL;
@@ -168,7 +393,6 @@ function GraciasPage() {
 // === PÁGINA DE DOWNSELL ===
 function DownsellPage() {
   useEffect(() => {
-    // Seguridad básica: Verificar si viene con el token interno o parámetros
     if (!window.location.search.includes("auth=qp_secure") && window.location.search.length < 5) {
       window.location.href = "/";
     }
@@ -273,18 +497,29 @@ function LegalPage() {
   );
 }
 
-// === LANDING PAGE PRINCIPAL ===
+// === LANDING PAGE PRINCIPAL RENOVADA ===
 function LandingPage() {
   const [activeFaq, setActiveFaq] = useState(null);
   const [isBumpSelected, setIsBumpSelected] = useState(false);
+  const [timeLeft, setTimeLeft] = useState({ hours: 11, minutes: 42, seconds: 15 });
 
-  // Ancla suave hacia la sección de agitación/dolor
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev.seconds > 0) return { ...prev, seconds: prev.seconds - 1 };
+        if (prev.minutes > 0) return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
+        if (prev.hours > 0) return { ...prev, hours: prev.hours - 1, minutes: 59, seconds: 59 };
+        return { hours: 11, minutes: 59, seconds: 59 };
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   const scrollToAgitation = (e) => {
     e.preventDefault();
     document.getElementById('agitation')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Link de Mercado Pago según si el Order Bump está seleccionado
   const handlePurchase = (e) => {
     e.preventDefault();
     trackTikTokEvent('InitiateCheckout', { 
@@ -320,12 +555,21 @@ function LandingPage() {
 
   return (
     <div className="landing-wrapper">
+      {/* STICKY HEADER TIMER (SE OCULTA SOLO MIENTRAS LA BARRA ROJA ESTÁ EN PANTALLA) */}
+      <StickyTopHeaderTimer timeLeft={timeLeft} />
+
+      {/* BADGE / WIDGET SOCIAL PROOF EN VIVO */}
+      <LiveSalesNotification />
+
+      {/* TOP URGENCY BANNER */}
       <div className="top-banner urgency-pulse">
-        🔥 ALERTA PERÚ: El precio promocional de pago único de S/ 29 subirá a S/ 97 este viernes a las 11:59 PM. Llévate los 3 Bonos Gratis hoy.
+        🔥 OFERTA FLASH 90% OFF · El precio promocional de S/ 29 subirá a S/ 97 al agotar cupos. ¡Acceso De Por Vida!
       </div>
 
+      {/* HERO SECTION */}
       <section className="hero">
         <div className="container">
+          <div className="hero-badge">⚡ EL SISTEMA NÚMERO 1 EN PERÚ</div>
           <h1>
             Cómo cerrar ventas por <span className="highlight">WhatsApp</span> en 5 minutos sin regalar tu trabajo ni rogar por la venta.
           </h1>
@@ -333,12 +577,47 @@ function LandingPage() {
             El sistema 'Copy-Paste' exacto que usan los negocios más rentables del Perú para fulminar objeciones, revivir clientes en visto y hacer que te paguen sin chistar.
           </p>
 
-          <div className="cta-wrapper">
-            <button onClick={scrollToAgitation} className="cta-button pulse-btn">
-              QUIERO MIS GUIONES AHORA (S/ 29)
-            </button>
-            <span className="secure-badge">🔒 Pago 100% Seguro vía Mercado Pago Perú</span>
-            <span className="guarantee-text">⏱️ Acceso Inmediato. Pago Único De Por Vida.</span>
+          <div className="hero-grid">
+            <div className="hero-cta-col">
+              <CountdownTimer timeLeft={timeLeft} />
+              
+              {/* PRECIO REORGANIZADO Y ELEGANTE */}
+              <div className="price-hero-card">
+                <div className="price-hero-main">
+                  <span className="currency-lbl">S/</span>
+                  <span className="price-num">29.00</span>
+                  <div className="price-details-col">
+                    <span className="old-price-line">Antes S/ 290</span>
+                    <span className="savings-pill">90% OFF · Ahorras S/ 261</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="cta-wrapper">
+                <button onClick={scrollToAgitation} className="cta-button pulse-btn">
+                  QUIERO MIS GUIONES AHORA (S/ 29)
+                </button>
+                <span className="secure-badge">🔒 Pago 100% Seguro vía Mercado Pago Perú</span>
+                <span className="guarantee-text">⏱️ Acceso Inmediato · Pago Único De Por Vida</span>
+              </div>
+            </div>
+
+            {/* MOCKUP 3D DIGIAL CARD */}
+            <div className="hero-mockup-card">
+              <div className="mockup-header">
+                <span className="tag">ECOSISTEMA DIGITAL</span>
+                <div className="line"></div>
+              </div>
+              <h2>BÓVEDA MAESTRA DE CIERRES</h2>
+              <p className="sub">Guiones Anti-Visto & Manejo de Objeciones por WhatsApp</p>
+              <div className="mockup-emojis">📱 💬 🚀 💸 📁</div>
+              <p className="mockup-italic">Edición Perú 2026 — Copia, pega y cierra en 10 segundos</p>
+              <div className="mockup-price-tag">
+                <span className="lbl">SOLO</span>
+                <span className="val">S/ 29</span>
+                <span className="off">90% OFF</span>
+              </div>
+            </div>
           </div>
 
           <div className="hero-testimonial-badge">
@@ -350,24 +629,113 @@ function LandingPage() {
           </div>
 
           <div className="trust-badges">
-            <span>✅ Pago Seguro</span>
-            <span>✅ Acceso Inmediato</span>
-            <span>✅ Un solo pago (Sin mensualidades)</span>
+            <span>✅ Pago 100% Seguro</span>
+            <span>✅ Descarga Inmediata</span>
+            <span>✅ Sin mensualidades (Pago Único)</span>
           </div>
         </div>
       </section>
 
-      <section className="agitation" id="agitation">
+      {/* STATS STRIP */}
+      <section className="stats-strip">
         <div className="container">
-          <h2>El error que te está costando miles de soles:</h2>
-          <ul className="pain-list">
-            <li>Pagas publicidad, consigues prospectos, te preguntan "¿Precio?"... y te clavan el visto. Dinero a la basura.</li>
-            <li>Te frustra ver cómo se asustan por el precio y huyen con tu competencia más barata.</li>
-            <li>No sabes qué responder cuando te dicen "está muy caro" o "yo te aviso", y terminas haciendo descuentos que matan tu ganancia.</li>
-          </ul>
+          <div className="stats-grid">
+            <div className="stat-item">
+              <div className="stat-num">60+</div>
+              <div className="stat-lbl">Guiones Copy-Paste</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-num">3</div>
+              <div className="stat-lbl">Bonos de Regalo Gratis</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-num">1,200+</div>
+              <div className="stat-lbl">Emprendedores Felices</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-num">100%</div>
+              <div className="stat-lbl">Pago Único Vitalicio</div>
+            </div>
+          </div>
         </div>
       </section>
 
+      {/* PAIN CARDS / AGITATION */}
+      <section className="agitation" id="agitation">
+        <div className="container">
+          <div className="section-tag-red">¿POR QUÉ TUS VENTAS SE CAEN?</div>
+          <h2>El error que te está costando miles de soles en WhatsApp:</h2>
+          <div className="pain-cards-grid">
+            <div className="pain-card">
+              <div className="pain-emoji">💬</div>
+              <h3>Te clavan el VISTO</h3>
+              <p>Pagas publicidad, consigues prospectos, te preguntan "¿Precio?"... y desaparecen. Dinero a la basura.</p>
+            </div>
+            <div className="pain-card">
+              <div className="pain-emoji">💸</div>
+              <h3>Guerra de precios</h3>
+              <p>Te frustra ver cómo se asustan por el precio y corren con la competencia más barata e informal.</p>
+            </div>
+            <div className="pain-card">
+              <div className="pain-emoji">😤</div>
+              <h3>"Está muy caro"</h3>
+              <p>No sabes qué responder cuando te dicen "yo te aviso", y terminas regalando descuentos que matan tu margen.</p>
+            </div>
+            <div className="pain-card">
+              <div className="pain-emoji">🔄</div>
+              <h3>Cero seguimiento</h3>
+              <p>Sientes vergüenza de insistir porque piensas que estás 'rogando', y pierdes el 80% de ventas que cierran al 2do intento.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* QUIZ SECTION */}
+      <QuizSection />
+
+      {/* COMPARISON VS TABLE */}
+      <section className="vs-section">
+        <div className="container">
+          <div className="section-tag-orange">LA DIFERENCIA</div>
+          <h2>Por qué esta Bóveda <span className="highlight-text">sí funciona</span> donde otros fallan</h2>
+          <p className="vs-sub">La mayoría de emprendedores pierden clientes porque responden improvisando sin una estructura persuasiva.</p>
+
+          <div className="vs-grid">
+            <div className="vs-card vs-bad">
+              <div className="vs-header">
+                <span className="vs-icon-bad">❌</span>
+                <h3>Sin la Bóveda Maestra</h3>
+                <p className="vs-sub-lbl">Lo que probablemente haces hoy</p>
+              </div>
+              <ul className="vs-list">
+                <li>❌ Enviar el precio a secas y quedar esperando milagros.</li>
+                <li>❌ Hacer descuentos desesperados que dañan tu margen de ganancia.</li>
+                <li>❌ Sentir vergüenza de escribir de nuevo tras ser dejado en visto.</li>
+                <li>❌ Perder horas pensando qué responder a cada cliente.</li>
+                <li>❌ Depender de la suerte y sufrir por las bajas ventas.</li>
+              </ul>
+            </div>
+
+            <div className="vs-card vs-good">
+              <div className="vs-badge-tag">⭐ RECOMENDADO</div>
+              <div className="vs-header">
+                <span className="vs-icon-good">✅</span>
+                <h3>Con la Bóveda Maestra</h3>
+                <p className="vs-sub-lbl">El método copy-paste de alto rendimiento</p>
+              </div>
+              <ul className="vs-list">
+                <li>✅ Guiones Anti-Visto que despiertan el interés inmediato.</li>
+                <li>✅ Plantillas para defender el valor sin bajar tu precio.</li>
+                <li>✅ Seguimiento persuasivo elegante en 10 segundos.</li>
+                <li>✅ Respuestas inmediatas copy-paste probadas en Perú.</li>
+                <li>✅ Cierres constantes y control total de tus ingresos.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* QUALIFICATION SECTION */}
       <section className="qualification">
         <div className="container">
           <div className="qualification-box">
@@ -390,12 +758,43 @@ function LandingPage() {
         </div>
       </section>
 
+      {/* TESTIMONIALS EXPANDED */}
+      <section className="testimonials">
+        <div className="container">
+          <div className="section-tag-orange">CASOS DE ÉXITO</div>
+          <h2>Lo que dicen otros emprendedores en Perú</h2>
+          <div className="testimonial-grid">
+            <div className="testimonial-card">
+              <div className="stars">⭐⭐⭐⭐⭐</div>
+              <p><em>"Antes mandaba la lista de precios y el 80% no me respondía. El primer día usé la plantilla de reactivación y cerré 4 pedidos acumulados de la semana."</em></p>
+              <strong>- Marcos R. (Venta de Calzado, Lima)</strong>
+            </div>
+            <div className="testimonial-card">
+              <div className="stars">⭐⭐⭐⭐⭐</div>
+              <p><em>"Pensé que era otro libro largo, pero son plantillas listas para copiar y pegar desde el celular. Mi tasa de conversión subió del 10% al 35% en 2 semanas."</em></p>
+              <strong>- Diana S. (Servicios Estéticos, Arequipa)</strong>
+            </div>
+            <div className="testimonial-card">
+              <div className="stars">⭐⭐⭐⭐⭐</div>
+              <p><em>"El bono de audios persuasivos es una joya. Les mando el audio siguiendo el guión y los clientes sienten total confianza para yapear al toque."</em></p>
+              <strong>- Gonzalo P. (Accesorios Tech, Trujillo)</strong>
+            </div>
+            <div className="testimonial-card">
+              <div className="stars">⭐⭐⭐⭐⭐</div>
+              <p><em>"Recuperé la inversión de S/29 con la primera venta que rescaté del 'visto'. Es la compra más rentable que he hecho este año."</em></p>
+              <strong>- Patricia M. (Ropa Femenina, Chiclayo)</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* VALUE STACK & CHECKOUT */}
       <section className="value-stack" id="checkout-section">
         <div className="container">
           <h2>No compres un PDF. Accede al Ecosistema de Cierre:</h2>
           
           <div className="stack-item">
-            <strong>📁 La Bóveda Anti-Visto (60+ Guiones)</strong>
+            <strong>📁 La Bóveda Anti-Visto (60+ Guiones Copy-Paste)</strong>
             <span className="value">S/ 199.00</span>
           </div>
           <div className="stack-item">
@@ -450,7 +849,7 @@ function LandingPage() {
               <button onClick={handlePurchase} className="cta-button pulse-btn">
                 {isBumpSelected ? "QUIERO MIS GUIONES + GARANTÍA (S/ 39)" : "SÍ, QUIERO RECUPERAR MIS VENTAS (S/ 29)"}
               </button>
-              <span className="secure-badge">🔒 Transacción Encriptada</span>
+              <span className="secure-badge">🔒 Transacción Encriptada vía Mercado Pago</span>
             </div>
 
             <div className="checkout-testimonial-card">
@@ -462,6 +861,7 @@ function LandingPage() {
         </div>
       </section>
 
+      {/* FAQS */}
       <section className="faqs">
         <div className="container">
           <h2>Preguntas Frecuentes</h2>
@@ -483,6 +883,7 @@ function LandingPage() {
         </div>
       </section>
 
+      {/* FOOTER */}
       <footer className="footer">
         <div className="container">
           <div className="footer-contact">
@@ -496,7 +897,7 @@ function LandingPage() {
           </p>
 
           <p className="footer-disclaimer" style={{ textAlign: 'justify', fontSize: '0.75rem', color: '#6B7280', lineHeight: '1.6' }}>
-            Este sitio web es operado y maintained por Quant Partners. El uso de este sitio web se rige por sus Términos de Servicio y Política de Privacidad. Quant Partners es una empresa proveedora de herramientas de ventas, plantillas y recursos de marketing digital. No vendemos oportunidades de negocio, programas para "hacerse rico rápidamente" ni sistemas automáticos para ganar dinero. Todos los productos, servicios, guiones, contenidos, herramientas y estrategias proporcionados por la empresa tienen fines exclusivamente educativos, referenciales e informativos.
+            Este sitio web es operado y mantenido por Quant Partners. El uso de este sitio web se rige por sus Términos de Servicio y Política de Privacidad. Quant Partners es una empresa proveedora de herramientas de ventas, plantillas y recursos de marketing digital. No vendemos oportunidades de negocio, programas para "hacerse rico rápidamente" ni sistemas automáticos para ganar dinero. Todos los productos, servicios, guiones, contenidos, herramientas y estrategias proporcionados por la empresa tienen fines exclusivamente educativos, referenciales e informativos.
             <br /><br />
             No podemos ni garantizamos tu capacidad para obtener resultados o generar ingresos a partir de nuestras plantillas, ideas, herramientas o estrategias. Nada de lo expuesto en este sitio web, en ninguno de nuestros otros sitios, programas, contenidos o productos constituye una promesa o garantía de resultados, ingresos actuales o futuros. No realizamos afirmaciones sobre ganancias, esfuerzos ni aseguramos que el uso de nuestros guiones produzca resultados financieros específicos.
             <br /><br />
@@ -517,6 +918,7 @@ function LandingPage() {
         </div>
       </footer>
 
+      {/* STICKY MOBILE CTA */}
       <div className="sticky-mobile-cta">
         <button onClick={scrollToAgitation} className="cta-button pulse-btn" style={{width: '100%', fontSize: '1.05rem', padding: '0.75rem'}}>
           QUIERO MIS GUIONES (S/ 29)

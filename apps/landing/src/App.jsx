@@ -503,7 +503,7 @@ function LandingPage() {
         <span className="top-banner-timer">
           {format(timeLeft.hours)}:{format(timeLeft.minutes)}:{format(timeLeft.seconds)}
         </span>{' '}
-        · El precio promocional de S/ 29 subirá a S/ 97 al agotar cupos.
+        · S/ 29 (Subirá a S/ 97)
       </div>
 
       {/* HERO SECTION */}

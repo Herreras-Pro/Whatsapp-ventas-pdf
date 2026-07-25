@@ -115,11 +115,7 @@ function StickyTopHeaderTimer({ timeLeft }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 280) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 280);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -127,7 +123,6 @@ function StickyTopHeaderTimer({ timeLeft }) {
   }, []);
 
   useEffect(() => {
-    // Observar exactamente la barra roja de urgencia
     const urgencyEl = document.querySelector('.urgency-bar-container');
     if (!urgencyEl) return;
 
@@ -143,9 +138,7 @@ function StickyTopHeaderTimer({ timeLeft }) {
   }, []);
 
   const format = (n) => (n < 10 ? `0${n}` : n);
-
-  // Muestra la barra negra cuando hay scroll Y la barra roja NO está visible en la pantalla
-  if (!isScrolled || isUrgencyBarVisible) return null;
+  const isVisible = isScrolled && !isUrgencyBarVisible;
 
   const scrollToCheckout = (e) => {
     e.preventDefault();
@@ -153,7 +146,7 @@ function StickyTopHeaderTimer({ timeLeft }) {
   };
 
   return (
-    <div className="sticky-top-timer-bar">
+    <div className={`sticky-top-timer-bar ${isVisible ? 'visible' : ''}`}>
       <div className="sticky-timer-content">
         <div className="sticky-timer-left">
           <span className="sticky-fire">🔥</span>

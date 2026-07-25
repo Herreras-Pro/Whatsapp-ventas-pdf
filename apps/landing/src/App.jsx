@@ -51,7 +51,7 @@ function LiveSalesNotification() {
       return () => clearTimeout(showTimer);
     }, 5500);
 
-    return () => clearTimeout(hideTimer);
+    return () => clearInterval(hideTimer);
   }, [isVisible, currentSaleIndex]);
 
   if (!isVisible) return null;
@@ -103,62 +103,6 @@ function CountdownTimer({ timeLeft }) {
           <span className="time-num">{format(timeLeft.seconds)}</span>
           <span className="time-lbl">SEG</span>
         </div>
-      </div>
-    </div>
-  );
-}
-
-// === COMPONENTE STICKY HEADER TIMER (DESAPARECE SOLO MIENTRAS LA BARRA ROJA ESTÁ EN PANTALLA) ===
-function StickyTopHeaderTimer({ timeLeft }) {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isUrgencyBarVisible, setIsUrgencyBarVisible] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 280);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const urgencyEl = document.querySelector('.urgency-bar-container');
-    if (!urgencyEl) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsUrgencyBarVisible(entry.isIntersecting);
-      },
-      { threshold: 0.1 }
-    );
-
-    observer.observe(urgencyEl);
-    return () => observer.disconnect();
-  }, []);
-
-  const format = (n) => (n < 10 ? `0${n}` : n);
-  const isVisible = isScrolled && !isUrgencyBarVisible;
-
-  const scrollToCheckout = (e) => {
-    e.preventDefault();
-    document.getElementById('checkout-section')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  return (
-    <div className={`sticky-top-timer-bar ${isVisible ? 'visible' : ''}`}>
-      <div className="sticky-timer-content">
-        <div className="sticky-timer-left">
-          <span className="sticky-fire">🔥</span>
-          <span className="sticky-title">OFERTA 90% OFF · Expira en:</span>
-          <div className="sticky-digits-box">
-            {format(timeLeft.hours)}:{format(timeLeft.minutes)}:{format(timeLeft.seconds)}
-          </div>
-        </div>
-        <button onClick={scrollToCheckout} className="sticky-buy-btn">
-          <span className="btn-desktop-text">OBTENER POR S/ 29.00</span>
-          <span className="btn-mobile-text">COMPRAR S/ 29</span>
-        </button>
       </div>
     </div>
   );
@@ -508,6 +452,8 @@ function LandingPage() {
     return () => clearInterval(timer);
   }, []);
 
+  const format = (n) => (n < 10 ? `0${n}` : n);
+
   const scrollToAgitation = (e) => {
     e.preventDefault();
     document.getElementById('agitation')?.scrollIntoView({ behavior: 'smooth' });
@@ -548,15 +494,16 @@ function LandingPage() {
 
   return (
     <div className="landing-wrapper">
-      {/* STICKY HEADER TIMER (SE OCULTA SOLO MIENTRAS LA BARRA ROJA ESTÁ EN PANTALLA) */}
-      <StickyTopHeaderTimer timeLeft={timeLeft} />
-
       {/* BADGE / WIDGET SOCIAL PROOF EN VIVO */}
       <LiveSalesNotification />
 
-      {/* TOP URGENCY BANNER */}
-      <div className="top-banner urgency-pulse">
-        🔥 OFERTA FLASH 90% OFF · El precio promocional de S/ 29 subirá a S/ 97 al agotar cupos. ¡Acceso De Por Vida!
+      {/* TOP URGENCY STICKY BANNER CON TIMER */}
+      <div className="top-banner urgency-pulse sticky-top-banner">
+        🔥 OFERTA FLASH 90% OFF · Expira en{' '}
+        <span className="top-banner-timer">
+          {format(timeLeft.hours)}:{format(timeLeft.minutes)}:{format(timeLeft.seconds)}
+        </span>{' '}
+        · El precio promocional de S/ 29 subirá a S/ 97 al agotar cupos.
       </div>
 
       {/* HERO SECTION */}
@@ -902,7 +849,7 @@ function LandingPage() {
             <br /><br />
             Muchos clientes no continúan con el programa, no aplican lo aprendido o intentan aplicar los guiones sin obtener los resultados esperados. Al utilizar este sitio y registrarte en nuestros servicios, reconoces que eres el único responsable de tus decisiones, acciones y resultados, y aceptas no intentar responsabilizar a Quant Partners bajo ninguna circunstancia.
             <br /><br />
-            Todo el material es propiedad intelectual de Quant Partners y está protegido por derechos de autor. Cualquier duplicación, reventa, reproducción o distribución no autorizada está estrictamente prohibida y sujeta a acciones legales. La Empresa puede enlazar o hacer referencia a contenidos, servicios o recursos creados o proporcionados por terceros no afiliados. Quant Partners no es responsable de dicho contenido ni lo respalda o aprueba.
+            Todo el material es propiedad intelectual de Quant Partners and está protegido por derechos de autor. Cualquier duplicación, reventa, reproducción o distribución no autorizada está estrictamente prohibida y sujeta a acciones legales. La Empresa puede enlazar o hacer referencia a contenidos, servicios o recursos creados o proporcionados por terceros no afiliados. Quant Partners no es responsable de dicho contenido ni lo respalda o aprueba.
             <br /><br />
             Utilizamos cookies para mejorar, promover y proteger nuestros servicios. Al continuar utilizando este sitio, aceptas nuestra Política de Privacidad y Términos de Uso.
             <br /><br />

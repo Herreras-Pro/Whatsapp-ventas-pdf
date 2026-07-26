@@ -6,11 +6,13 @@ Todas las modificaciones, optimizaciones de conversión (CRO), correcciones téc
 
 ## [1.5.0] - 2026-07-26 (Optimización PageSpeed: Code Splitting & Diferimiento)
 
-### ⚡ Rendimiento (Performance)
+### ⚡ Rendimiento (Performance) - Fase 2 (Gemini Audit)
+- **Lazy Tracking (Píxeles Diferidos):** Implementación de inyección asíncrona por interacción (scroll/click) o timeout (3.5s) para los scripts pesados de TikTok Pixel y Google Tag Manager, liberando el Hilo Principal (Main Thread) y eliminando el retraso de LCP (Render Delay).
+- **Aceleración por Hardware (CSS GPU):** Refactorización de la animación continua `.urgency-stripe` de `background-position` (intensiva en CPU) hacia `transform: translateX()` (compuesta por GPU), eliminando los recalculos de layout continuos.
+- **SEO & Accesibilidad:** Creación de `robots.txt` válido para evitar errores 404 del motor de búsqueda y adición de la etiqueta `<title>` global en `index.html`.
+
+### ⚡ Rendimiento (Performance) - Fase 1
 - **Pre-renderizado Estático (Hero Section):** Inyección del HTML y CSS inline exacto de la sección Hero directamente dentro de `index.html`. Esto puentea por completo la penalidad del Client-Side Rendering, logrando un LCP (Largest Contentful Paint) instantáneo al cargar la web antes de que React se inicialice.
-- **App Shell (Skeleton Loader):** Reemplazado por el pre-renderizado del Hero.
-- **Code Splitting (React.lazy):** Fragmentación del monolito `App.jsx` en 6 componentes de página independientes (`src/pages/`) cargados bajo demanda vía `<Suspense>`, reduciendo drásticamente el tamaño del JavaScript inicial (LCP/TBT).
-- **Diferimiento de Píxeles & Fuentes:** Traslado estratégico del Píxel de TikTok y Google Tag Manager al final del `<body>`, y pre-carga de Google Fonts vía HTML `<link>` (eliminando el `@import` en CSS) para evitar bloqueos de renderizado.
 
 
 ## [1.4.0] - 2026-07-26 (Blindaje de Píxeles & Tracking de Conversiones)

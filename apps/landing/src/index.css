@@ -842,7 +842,22 @@ h2 {
 }
 
 .urgency-progress-fill {
+  position: relative;
   background-color: #DC2626;
+  width: 88%;
+  height: 100%;
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(220, 38, 38, 0.8);
+}
+
+.urgency-progress-fill::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% + 30px);
+  height: 100%;
   background-image: linear-gradient(
     45deg,
     #EF4444 25%,
@@ -854,16 +869,13 @@ h2 {
     #B91C1C
   );
   background-size: 30px 30px;
-  width: 88%;
-  height: 100%;
-  border-radius: 50px;
   animation: urgency-stripe 1.2s linear infinite;
-  box-shadow: 0 0 10px rgba(220, 38, 38, 0.8);
+  z-index: 1;
 }
 
 @keyframes urgency-stripe {
-  0% { background-position: 0 0; }
-  100% { background-position: 30px 0; }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-30px); }
 }
 
 /* CTA INLINE TESTIMONIAL STYLES */

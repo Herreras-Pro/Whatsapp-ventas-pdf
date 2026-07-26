@@ -1254,6 +1254,49 @@ h2 {
 
 
 
+/* HERO SCARCITY CARD (REEMPLAZO DE TIMER DUPLICADO - OPCIÓN A) */
+.hero-scarcity-card {
+  background: linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%);
+  border: 1.5px solid #FCA5A5;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.12);
+  text-align: left;
+}
+
+.scarcity-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.scarcity-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.scarcity-title {
+  color: #991B1B;
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+.scarcity-desc {
+  color: #4B5563;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.highlight-seats {
+  color: #DC2626;
+  font-weight: 900;
+  text-decoration: underline;
+}
+
 /* HERO MOCKUP 3D CARD */
 .hero-mockup-card {
   background: linear-gradient(145deg, #FFFBEB 0%, #FEF3C7 100%);

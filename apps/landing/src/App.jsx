@@ -519,7 +519,14 @@ function LandingPage() {
 
           <div className="hero-grid">
             <div className="hero-cta-col">
-              <CountdownTimer timeLeft={timeLeft} />
+              {/* BADGE DE ESCASEZ Y CUPOS DISPONIBLES (OPCIÓN A) */}
+              <div className="hero-scarcity-card">
+                <span className="scarcity-icon">🚨</span>
+                <div className="scarcity-info">
+                  <strong className="scarcity-title">¡ÚLTIMOS CUPOS PROMOCIONALES!</strong>
+                  <span className="scarcity-desc">Solo quedan <span className="highlight-seats">4 accesos disponibles</span> a S/ 29.</span>
+                </div>
+              </div>
               
               {/* PRECIO REORGANIZADO Y ELEGANTE */}
               <div className="price-hero-card">

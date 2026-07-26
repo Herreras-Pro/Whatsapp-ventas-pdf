@@ -61,12 +61,19 @@
 10. **Preguntas Frecuentes (FAQs):** Enfoque en Pago Único sin mensualidades.
 11. **Trust Factor & Legal Footer:** Datos de contacto `partners@thequantpartners.com` y Disclaimer legal completo.
 
+## Reglas de Rendimiento Frontend (PageSpeed 90+)
+Para mantener la calificación en la zona verde (90-100) en móviles, todo código nuevo debe respetar estrictamente estas 3 reglas:
+- **Lazy Tracking Obligatorio:** PROHIBIDO inyectar píxeles de rastreo (TikTok, Meta, Google) directamente en la carga inicial (`index.html`). DEBEN envolverse en un inyector JS asíncrono gatillado por interacción (scroll/touch/mousemove) o con un timeout mínimo de 3500ms para evitar el `Render Delay` de LCP.
+- **Hero Pre-rendering Manual:** El HTML estático (App Shell) de la sección superior (`.hero`) debe permanecer incrustado en `<div id="root">` dentro de `index.html`. Esto puentea el cuello de botella del Client-Side Rendering y garantiza un LCP inicial de ~0.1s.
+- **Aceleración GPU en CSS:** Toda animación continua o repetitiva DEBE usar `transform` o `opacity`. Está PROHIBIDO animar propiedades de redibujado intensivo (layout/paint) como `background-position`, `top`, `left`, `width` o `height`.
+
 ## Estado del Ecosistema de SOPs (Guardados en `docs/` local)
 - `SOP-QP-001`: Creación de Micro-servicios / Landings (Completado).
 - `SOP-QP-002`: Creación y Lanzamiento de TikTok Ads & Events API (Completado - Developer App en aprobación).
 - `SOP-QP-003`: Producción de Creativos Verticales Cinemáticos de 10s con IA y TikTok Symphony v2.1 (Completado).
 - `SOP-QP-004`: Atención al Cliente y Reembolsos por Correo (Completado).
 - `SOP-QP-005`: Control de Métricas, CPA, Estrategia ABO S/ 20/día (48h y 5d) y Reglas de Escalamiento (v1.1 - Completado).
+- `SOP-QP-006`: Optimización Extrema PageSpeed (90+) para React SPAs (Completado).
 
 ## Estado de Conexiones de Media Buying & Píxeles (Verificado 2026-07-26)
 - **Google Ads API (100% Completo):** Credenciales en `.env.local` (`GOOGLE_ADS_CUSTOMER_ID=316-040-6729`, `CLIENT_ID`, `CLIENT_SECRET`, `DEVELOPER_TOKEN`, `REFRESH_TOKEN`). Permite lectura de métricas, gestión y creación de campañas de remarketing por script.

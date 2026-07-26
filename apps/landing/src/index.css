@@ -1254,6 +1254,28 @@ h2 {
 
 
 
+/* RESPONSIVE SCARCITY & CTA WRAPPER CONTROLS */
+.mobile-only-scarcity {
+  display: none;
+}
+
+.desktop-only-scarcity {
+  display: flex;
+}
+
+@media (max-width: 600px) {
+  .hero-desktop-cta-wrapper {
+    display: none !important;
+  }
+  .desktop-only-scarcity {
+    display: none !important;
+  }
+  .mobile-only-scarcity {
+    display: flex !important;
+    margin-top: 1.25rem;
+  }
+}
+
 /* HERO SCARCITY CARD (REEMPLAZO DE TIMER DUPLICADO - OPCIÓN A) */
 .hero-scarcity-card {
   background: linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%);

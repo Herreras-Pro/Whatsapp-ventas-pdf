@@ -519,15 +519,6 @@ function LandingPage() {
 
           <div className="hero-grid">
             <div className="hero-cta-col">
-              {/* BADGE DE ESCASEZ Y CUPOS DISPONIBLES (OPCIÓN A) */}
-              <div className="hero-scarcity-card">
-                <span className="scarcity-icon">🚨</span>
-                <div className="scarcity-info">
-                  <strong className="scarcity-title">¡ÚLTIMOS CUPOS PROMOCIONALES!</strong>
-                  <span className="scarcity-desc">Solo quedan <span className="highlight-seats">4 accesos disponibles</span> a S/ 29.</span>
-                </div>
-              </div>
-              
               {/* PRECIO REORGANIZADO Y ELEGANTE */}
               <div className="price-hero-card">
                 <div className="price-hero-main">
@@ -540,7 +531,16 @@ function LandingPage() {
                 </div>
               </div>
 
-              <div className="cta-wrapper">
+              {/* BADGE DE ESCASEZ Y CUPOS DISPONIBLES (EN DESKTOP) */}
+              <div className="hero-scarcity-card desktop-only-scarcity">
+                <span className="scarcity-icon">🚨</span>
+                <div className="scarcity-info">
+                  <strong className="scarcity-title">¡ÚLTIMOS CUPOS PROMOCIONALES!</strong>
+                  <span className="scarcity-desc">Solo quedan <span className="highlight-seats">4 accesos disponibles</span> a S/ 29.</span>
+                </div>
+              </div>
+
+              <div className="cta-wrapper hero-desktop-cta-wrapper">
                 <button onClick={scrollToAgitation} className="cta-button pulse-btn">
                   QUIERO MIS GUIONES AHORA (S/ 29)
                 </button>
@@ -550,19 +550,30 @@ function LandingPage() {
             </div>
 
             {/* MOCKUP 3D DIGIAL CARD */}
-            <div className="hero-mockup-card">
-              <div className="mockup-header">
-                <span className="tag">ECOSISTEMA DIGITAL</span>
-                <div className="line"></div>
+            <div className="hero-mockup-col">
+              <div className="hero-mockup-card">
+                <div className="mockup-header">
+                  <span className="tag">ECOSISTEMA DIGITAL</span>
+                  <div className="line"></div>
+                </div>
+                <h2>BÓVEDA MAESTRA DE CIERRES</h2>
+                <p className="sub">Guiones Anti-Visto & Manejo de Objeciones por WhatsApp</p>
+                <div className="mockup-emojis">📱 💬 🚀 💸 📁</div>
+                <p className="mockup-italic">Edición Perú 2026 — Copia, pega y cierra en 10 segundos</p>
+                <div className="mockup-price-tag">
+                  <span className="lbl">SOLO</span>
+                  <span className="val">S/ 29</span>
+                  <span className="off">90% OFF</span>
+                </div>
               </div>
-              <h2>BÓVEDA MAESTRA DE CIERRES</h2>
-              <p className="sub">Guiones Anti-Visto & Manejo de Objeciones por WhatsApp</p>
-              <div className="mockup-emojis">📱 💬 🚀 💸 📁</div>
-              <p className="mockup-italic">Edición Perú 2026 — Copia, pega y cierra en 10 segundos</p>
-              <div className="mockup-price-tag">
-                <span className="lbl">SOLO</span>
-                <span className="val">S/ 29</span>
-                <span className="off">90% OFF</span>
+
+              {/* BADGE DE ESCASEZ Y CUPOS DISPONIBLES (EN MOBILE REEMPLAZA AL BOTÓN VERDE) */}
+              <div className="hero-scarcity-card mobile-only-scarcity">
+                <span className="scarcity-icon">🚨</span>
+                <div className="scarcity-info">
+                  <strong className="scarcity-title">¡ÚLTIMOS CUPOS PROMOCIONALES!</strong>
+                  <span className="scarcity-desc">Solo quedan <span className="highlight-seats">4 accesos disponibles</span> a S/ 29.</span>
+                </div>
               </div>
             </div>
           </div>

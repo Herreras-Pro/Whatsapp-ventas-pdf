@@ -4,6 +4,13 @@ Todas las modificaciones, optimizaciones de conversión (CRO), correcciones téc
 
 ---
 
+## [1.5.0] - 2026-07-26 (Optimización PageSpeed: Code Splitting & Diferimiento)
+
+### ⚡ Rendimiento (Performance)
+- **Code Splitting (React.lazy):** Fragmentación del monolito `App.jsx` en 6 componentes de página independientes (`src/pages/`) cargados bajo demanda vía `<Suspense>`, reduciendo drásticamente el tamaño del JavaScript inicial (LCP/TBT).
+- **Diferimiento de Píxeles:** Traslado estratégico del Píxel de TikTok y Google Tag Manager (gtag) desde el `<head>` hacia el final del `<body>` en `index.html` para eliminar el bloqueo de renderizado visual (Render-Blocking Resources).
+
+
 ## [1.4.0] - 2026-07-26 (Blindaje de Píxeles & Tracking de Conversiones)
 
 ### 📊 Medición & Analítica (TikTok Ads & Google Ads)

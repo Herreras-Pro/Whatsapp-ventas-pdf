@@ -1264,6 +1264,11 @@ h2 {
 }
 
 @media (max-width: 600px) {
+  .hero-grid {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 1.25rem;
+  }
   .hero-desktop-cta-wrapper {
     display: none !important;
   }

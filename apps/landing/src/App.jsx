@@ -519,18 +519,6 @@ function LandingPage() {
 
           <div className="hero-grid">
             <div className="hero-cta-col">
-              {/* PRECIO REORGANIZADO Y ELEGANTE */}
-              <div className="price-hero-card">
-                <div className="price-hero-main">
-                  <span className="currency-lbl">S/</span>
-                  <span className="price-num">29.00</span>
-                  <div className="price-details-col">
-                    <span className="old-price-line">Antes S/ 290</span>
-                    <span className="savings-pill">90% OFF · Ahorras S/ 261</span>
-                  </div>
-                </div>
-              </div>
-
               {/* BADGE DE ESCASEZ Y CUPOS DISPONIBLES (EN DESKTOP) */}
               <div className="hero-scarcity-card desktop-only-scarcity">
                 <span className="scarcity-icon">🚨</span>

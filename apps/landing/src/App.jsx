@@ -9,10 +9,16 @@ const MP_LINKS = {
   DOWNSELL: 'https://mpago.la/1tEwFNv',  // Pack 50 Anuncios Descuento (S/ 37.00)
 };
 
-// === HELPER TIKTOK PIXEL ===
+// === HELPER TIKTOK PIXEL & GOOGLE ADS ===
 const trackTikTokEvent = (eventName, params = {}) => {
   if (window.ttq && typeof window.ttq.track === 'function') {
     window.ttq.track(eventName, params);
+  }
+};
+
+const trackGoogleAdsEvent = (eventName, params = {}) => {
+  if (window.gtag && typeof window.gtag === 'function') {
+    window.gtag('event', eventName, params);
   }
 };
 
@@ -226,6 +232,19 @@ function AccesoPremiumPage() {
   useEffect(() => {
     if (window.location.search.length < 5) {
       window.location.href = "/";
+    } else {
+      // Disparar Evento de Venta Confirmada VIP (TikTok Pixel & Google Ads Remarketing Exclusion)
+      trackTikTokEvent('CompletePayment', {
+        value: 67.00,
+        currency: 'PEN',
+        content_name: 'Pack 50 Plantillas Anuncios VIP'
+      });
+      trackGoogleAdsEvent('purchase', {
+        transaction_id: 'QP_VIP_' + Date.now(),
+        value: 67.00,
+        currency: 'PEN',
+        items: [{ item_name: 'Pack 50 Plantillas Anuncios VIP' }]
+      });
     }
   }, []);
 
@@ -267,11 +286,34 @@ function GraciasPage() {
   useEffect(() => {
     if (window.location.search.length < 5) {
       window.location.href = "/";
+    } else {
+      // Disparar Evento de Venta Confirmada Base (TikTok Pixel Lookalike & Google Ads Conversion)
+      trackTikTokEvent('CompletePayment', {
+        value: 29.00,
+        currency: 'PEN',
+        content_name: 'Boveda Maestra de Cierres'
+      });
+      trackGoogleAdsEvent('purchase', {
+        transaction_id: 'QP_BASE_' + Date.now(),
+        value: 29.00,
+        currency: 'PEN',
+        items: [{ item_name: 'Boveda Maestra de Cierres' }]
+      });
     }
   }, []);
 
   const handleUpsellPurchase = (e) => {
     e.preventDefault();
+    trackTikTokEvent('InitiateCheckout', {
+      value: 67.00,
+      currency: 'PEN',
+      content_name: 'Pack 50 Plantillas Meta Ads'
+    });
+    trackGoogleAdsEvent('begin_checkout', {
+      value: 67.00,
+      currency: 'PEN',
+      items: [{ item_name: 'Pack 50 Plantillas Meta Ads' }]
+    });
     window.location.href = MP_LINKS.UPSELL;
   };
 
@@ -332,11 +374,32 @@ function DownsellPage() {
   useEffect(() => {
     if (!window.location.search.includes("auth=qp_secure") && window.location.search.length < 5) {
       window.location.href = "/";
+    } else {
+      trackTikTokEvent('ViewContent', {
+        value: 37.00,
+        currency: 'PEN',
+        content_name: 'Downsell Pack 50 Plantillas'
+      });
+      trackGoogleAdsEvent('view_item', {
+        value: 37.00,
+        currency: 'PEN',
+        items: [{ item_name: 'Downsell Pack 50 Plantillas' }]
+      });
     }
   }, []);
 
   const handleDownsellPurchase = (e) => {
     e.preventDefault();
+    trackTikTokEvent('InitiateCheckout', {
+      value: 37.00,
+      currency: 'PEN',
+      content_name: 'Downsell Pack 50 Plantillas'
+    });
+    trackGoogleAdsEvent('begin_checkout', {
+      value: 37.00,
+      currency: 'PEN',
+      items: [{ item_name: 'Downsell Pack 50 Plantillas' }]
+    });
     window.location.href = MP_LINKS.DOWNSELL;
   };
 
@@ -461,11 +524,21 @@ function LandingPage() {
 
   const handlePurchase = (e) => {
     e.preventDefault();
+    const offerValue = isBumpSelected ? 39 : 29;
+    const offerName = isBumpSelected ? 'Bóveda + Garantía VIP' : 'Bóveda Base';
+
     trackTikTokEvent('InitiateCheckout', { 
-      value: isBumpSelected ? 39 : 29, 
+      value: offerValue, 
       currency: 'PEN',
-      content_name: isBumpSelected ? 'Bóveda + Garantía VIP' : 'Bóveda Base'
+      content_name: offerName
     });
+
+    trackGoogleAdsEvent('begin_checkout', {
+      value: offerValue,
+      currency: 'PEN',
+      items: [{ item_name: offerName }]
+    });
+
     window.location.href = isBumpSelected ? MP_LINKS.BUMP : MP_LINKS.BASE;
   };
 

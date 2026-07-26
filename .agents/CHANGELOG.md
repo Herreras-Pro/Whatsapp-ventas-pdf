@@ -4,6 +4,25 @@ Todas las modificaciones, optimizaciones de conversión (CRO), correcciones téc
 
 ---
 
+## [1.4.0] - 2026-07-26 (Blindaje de Píxeles & Tracking de Conversiones)
+
+### 📊 Medición & Analítica (TikTok Ads & Google Ads)
+- **Google Tag (`gtag.js` - `AW-3160406729`):** Instalado en `apps/landing/index.html` para capturar audiencias de remarketing.
+- **Audiencia de Intención Caliente (`begin_checkout`):** Disparado en TikTok (`InitiateCheckout`) y Google Ads (`begin_checkout`) al hacer clic en *"QUIERO MIS GUIONES"* con valor dinámico (`S/ 29` o `S/ 39` con Order Bump).
+- **Entrenamiento de Algoritmo TikTok (`CompletePayment`):** Disparado automáticamente en `useEffect` de `/gracias` (`S/ 29`/`S/ 39`) y `/acceso-premium` (`S/ 67`/`S/ 37`) enviando moneda `PEN` para alimentar el algoritmo de audiencias Lookalike.
+- **Exclusión de Compradores en Remarketing (`purchase`):** Disparado en Google Ads al confirmar pago para excluir compradores activos del gasto en Display/YouTube Retargeting.
+
+---
+
+## [1.3.0] - 2026-07-26 (Actualización de SOP-QP-005: Estrategia ABO S/ 20/día)
+
+### 📈 Estrategia Paid Media & Adquisición (TikTok Ads)
+- **Actualización de SOP-QP-005 a Versión 1.1:** Incorporado el protocolo completo de prueba de creativos en TikTok Ads mediante **ABO de S/ 20.00 PEN / día** (mínimo permitido).
+- **Fase 1 (48 Horas / S/ 40.00):** Medición de métricas tempranas (Hook Rate >25%, CTR >1.2%, Inicios de Pago >= 3). Apagado preventivo si CTR <0.8% o 0 inicios de pago.
+- **Fase 2 (Días 3 al 5 / S/ 100.00 Acumulados):** Regla de decisión de consistencia (≥ 4 ventas o ROAS > 2.0x ➔ Escalar +20% a +30% cada 48h y mantener 15-30 días; < 3 ventas o CPA > S/ 35 ➔ Pausar y cambiar creativos).
+
+---
+
 ## [1.2.0] - 2026-07-25 (Rediseño CRO & Optimización Móvil Completa)
 
 ### 🎨 Añadido (Feat)

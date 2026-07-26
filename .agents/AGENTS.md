@@ -9,7 +9,9 @@
 - **Historial de Cambios (Changelog):** Registo cronológico detallado mantenido en `.agents/CHANGELOG.md`.
 
 ## Embudo de Ventas (Funnel) - 100% Pago Único (Sin Suscripciones)
-1. **Tráfico Principal:** TikTok Ads hacia la Landing Page (`/`).
+1. **Tráfico Principal (Adquisición vs Remarketing):** 
+   - **TikTok Ads:** Adquisición **100% de Tráfico Frío** (CPC bajo ~S/ 0.20 - S/ 0.50 PEN).
+   - **Google Ads:** **100% EXCLUSIVO para Remarketing / Retargeting** (Display & YouTube) para rescatar visitas que salieron de la landing sin comprar. Prohibido usar Google Search en tráfico frío (CPC alto de S/ 3 - S/ 6 PEN destruye margen de ticket S/ 29).
 2. **Producto Principal (Landing `/`):** 
    - **Bóveda Base:** S/ 29.00 (Pago Único, Acceso De Por Vida).
      - Link Mercado Pago: `https://mpago.la/1YFVjgT`
@@ -64,7 +66,7 @@
 - `SOP-QP-002`: Creación y Lanzamiento de TikTok Ads & Events API (Completado - Developer App en aprobación).
 - `SOP-QP-003`: Producción de Creativos Verticales Cinemáticos de 10s con IA y TikTok Symphony v2.1 (Completado).
 - `SOP-QP-004`: Atención al Cliente y Reembolsos por Correo (Completado).
-- `SOP-QP-005`: Control de Métricas, CPA y Reglas de Escalamiento (Completado).
+- `SOP-QP-005`: Control de Métricas, CPA, Estrategia ABO S/ 20/día (48h y 5d) y Reglas de Escalamiento (v1.1 - Completado).
 
 ## Reglas Operativas y de Control Git
 - **Confirmación Obligatoria de Push:** SIEMPRE preguntar y solicitar autorización explícita al usuario ANTES de ejecutar `git push`.

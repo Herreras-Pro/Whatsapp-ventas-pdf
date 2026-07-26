@@ -68,6 +68,12 @@
 - `SOP-QP-004`: Atención al Cliente y Reembolsos por Correo (Completado).
 - `SOP-QP-005`: Control de Métricas, CPA, Estrategia ABO S/ 20/día (48h y 5d) y Reglas de Escalamiento (v1.1 - Completado).
 
+## Estado de Conexiones de Media Buying & Píxeles (Verificado 2026-07-26)
+- **Google Ads API (100% Completo):** Credenciales en `.env.local` (`GOOGLE_ADS_CUSTOMER_ID=316-040-6729`, `CLIENT_ID`, `CLIENT_SECRET`, `DEVELOPER_TOKEN`, `REFRESH_TOKEN`). Permite lectura de métricas, gestión y creación de campañas de remarketing por script.
+- **Google Tag & Remarketing (`AW-3160406729`):** Instalado en `index.html`. Dispara `begin_checkout` (intencionados sin compra para Remarketing en Display/YouTube) y `purchase` (exclusión de compradores). Verificado en vivo en Tag Assistant.
+- **TikTok Pixel (`D9G1MPJC77U0255M8JG0`) & Events API:** 100% activo en la web (`index.html` y `App.jsx`). Dispara `LandingPageView`, `PageView`, `InitiateCheckout` y `CompletePayment` (Lookalike). Verificado en vivo en TikTok Pixel Helper (<156ms).
+- **TikTok Marketing API (Developer App):** Developer Profile enviado y en revisión por TikTok (`Your profile is currently under review`). Events API y Píxel operando al 100% para campañas manuales en `ads.tiktok.com`.
+
 ## Reglas Operativas y de Control Git
 - **Confirmación Obligatoria de Push:** SIEMPRE preguntar y solicitar autorización explícita al usuario ANTES de ejecutar `git push`.
 - **Protección de SOPs y Credenciales:** La carpeta `docs/` y archivos `.env.local` son estrictamente locales y están ignorados en `.gitignore`.

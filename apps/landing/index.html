@@ -10,7 +10,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <style>
+        .app-shell { font-family: 'Inter', sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 40px 20px; background: #ffffff; min-height: 100vh; text-align: center; }
+        .skel-badge { background: #E5E7EB; width: 220px; height: 28px; border-radius: 20px; margin-bottom: 24px; }
+        .skel-h1 { background: #D1D5DB; width: 100%; max-width: 600px; height: 48px; border-radius: 8px; margin-bottom: 12px; }
+        .skel-h1-2 { background: #D1D5DB; width: 80%; max-width: 480px; height: 48px; border-radius: 8px; margin-bottom: 24px; }
+        .skel-p { background: #F3F4F6; width: 95%; max-width: 500px; height: 20px; border-radius: 4px; margin-bottom: 8px; }
+        .skel-btn { background: #25D366; width: 100%; max-width: 400px; height: 60px; border-radius: 50px; margin-top: 32px; }
+      </style>
+      <div class="app-shell">
+        <div class="skel-badge"></div>
+        <div class="skel-h1"></div>
+        <div class="skel-h1-2"></div>
+        <div class="skel-p"></div>
+        <div class="skel-p" style="width: 85%"></div>
+        <div class="skel-p" style="width: 70%"></div>
+        <div class="skel-btn"></div>
+      </div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
     
     <!-- TikTok Pixel Code Start -->

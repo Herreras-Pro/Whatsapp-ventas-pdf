@@ -74,6 +74,7 @@ Para mantener la calificación en la zona verde (90-100) en móviles, todo códi
 - `SOP-QP-004`: Atención al Cliente y Reembolsos por Correo (Completado).
 - `SOP-QP-005`: Control de Métricas, CPA, Estrategia ABO S/ 20/día (48h y 5d) y Reglas de Escalamiento (v1.1 - Completado).
 - `SOP-QP-006`: Optimización Extrema PageSpeed (90+) para React SPAs (Completado).
+- `SOP-QP-007`: Estrategia de Adquisición en Google Ads / YouTube Video Action (Completado).
 
 ## Estado de Conexiones de Media Buying & Píxeles (Verificado 2026-07-26)
 - **Google Ads API (100% Completo):** Credenciales en `.env.local` (`GOOGLE_ADS_CUSTOMER_ID=316-040-6729`, `CLIENT_ID`, `CLIENT_SECRET`, `DEVELOPER_TOKEN`, `REFRESH_TOKEN`). Permite lectura de métricas, gestión y creación de campañas de remarketing por script.

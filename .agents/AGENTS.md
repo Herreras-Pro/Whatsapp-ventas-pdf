@@ -6,6 +6,7 @@
 - **Repositorio Git Remote:** `https://github.com/Herreras-Pro/Whatsapp-ventas-pdf.git`
 - **Despliegue Vercel:** Orquestado automáticamente mediante `vercel.json` en la raíz (`npm run build --workspace=apps/landing`).
 - **Backend/Dashboard:** Carpetas preparadas en `apps/backend` y `apps/dashboard` para futuras expansiones.
+- **Historial de Cambios (Changelog):** Registo cronológico detallado mantenido en `.agents/CHANGELOG.md`.
 
 ## Embudo de Ventas (Funnel) - 100% Pago Único (Sin Suscripciones)
 1. **Tráfico Principal:** TikTok Ads hacia la Landing Page (`/`).

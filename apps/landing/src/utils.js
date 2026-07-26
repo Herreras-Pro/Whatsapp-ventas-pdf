@@ -6,12 +6,7 @@ export const MP_LINKS = {
   DOWNSELL: 'https://mpago.la/1tEwFNv',  // Pack 50 Anuncios Descuento (S/ 37.00)
 };
 
-// === HELPER TIKTOK PIXEL & GOOGLE ADS ===
-export const trackTikTokEvent = (eventName, params = {}) => {
-  if (window.ttq && typeof window.ttq.track === 'function') {
-    window.ttq.track(eventName, params);
-  }
-};
+// === HELPER GOOGLE ADS ===
 
 export const trackGoogleAdsEvent = (eventName, params = {}) => {
   if (window.gtag && typeof window.gtag === 'function') {

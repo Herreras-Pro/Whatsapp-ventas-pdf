@@ -1,16 +1,11 @@
 import React, { useEffect } from 'react';
-import { MP_LINKS, trackTikTokEvent, trackGoogleAdsEvent } from '../utils';
+import { MP_LINKS, trackGoogleAdsEvent } from '../utils';
 
 export default function GraciasPage() {
   useEffect(() => {
     if (window.location.search.length < 5) {
       window.location.href = "/";
     } else {
-      trackTikTokEvent('CompletePayment', {
-        value: 29.00,
-        currency: 'PEN',
-        content_name: 'Boveda Maestra de Cierres'
-      });
       trackGoogleAdsEvent('purchase', {
         transaction_id: 'QP_BASE_' + Date.now(),
         value: 29.00,
@@ -22,11 +17,6 @@ export default function GraciasPage() {
 
   const handleUpsellPurchase = (e) => {
     e.preventDefault();
-    trackTikTokEvent('InitiateCheckout', {
-      value: 67.00,
-      currency: 'PEN',
-      content_name: 'Pack 50 Plantillas Meta Ads'
-    });
     trackGoogleAdsEvent('begin_checkout', {
       value: 67.00,
       currency: 'PEN',

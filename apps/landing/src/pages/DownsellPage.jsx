@@ -1,16 +1,11 @@
 import React, { useEffect } from 'react';
-import { MP_LINKS, trackTikTokEvent, trackGoogleAdsEvent } from '../utils';
+import { MP_LINKS, trackGoogleAdsEvent } from '../utils';
 
 export default function DownsellPage() {
   useEffect(() => {
     if (!window.location.search.includes("auth=qp_secure") && window.location.search.length < 5) {
       window.location.href = "/";
     } else {
-      trackTikTokEvent('ViewContent', {
-        value: 37.00,
-        currency: 'PEN',
-        content_name: 'Downsell Pack 50 Plantillas'
-      });
       trackGoogleAdsEvent('view_item', {
         value: 37.00,
         currency: 'PEN',
@@ -21,11 +16,6 @@ export default function DownsellPage() {
 
   const handleDownsellPurchase = (e) => {
     e.preventDefault();
-    trackTikTokEvent('InitiateCheckout', {
-      value: 37.00,
-      currency: 'PEN',
-      content_name: 'Downsell Pack 50 Plantillas'
-    });
     trackGoogleAdsEvent('begin_checkout', {
       value: 37.00,
       currency: 'PEN',

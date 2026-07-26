@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MP_LINKS, trackTikTokEvent, trackGoogleAdsEvent } from '../utils';
+import { MP_LINKS, trackGoogleAdsEvent } from '../utils';
 
 // === COMPONENTE WIDGET LIVE SALES (SOCIAL PROOF TOAST EN VIVO) ===
 const RECENT_SALES = [
@@ -196,12 +196,6 @@ export default function LandingPage() {
     e.preventDefault();
     const offerValue = isBumpSelected ? 39 : 29;
     const offerName = isBumpSelected ? 'Bóveda + Garantía VIP' : 'Bóveda Base';
-
-    trackTikTokEvent('InitiateCheckout', { 
-      value: offerValue, 
-      currency: 'PEN',
-      content_name: offerName
-    });
 
     trackGoogleAdsEvent('begin_checkout', {
       value: offerValue,

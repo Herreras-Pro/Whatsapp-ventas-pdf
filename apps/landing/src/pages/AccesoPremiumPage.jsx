@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { trackTikTokEvent, trackGoogleAdsEvent } from '../utils';
+import { trackGoogleAdsEvent } from '../utils';
 
 export default function AccesoPremiumPage() {
   const driveFolderLink = "https://drive.google.com/drive/folders/1PztWxFEP34uqBJe2gamIIwiEaJMU1jiA?usp=sharing";
@@ -9,11 +9,6 @@ export default function AccesoPremiumPage() {
     if (window.location.search.length < 5) {
       window.location.href = "/";
     } else {
-      trackTikTokEvent('CompletePayment', {
-        value: 67.00,
-        currency: 'PEN',
-        content_name: 'Pack 50 Plantillas Anuncios VIP'
-      });
       trackGoogleAdsEvent('purchase', {
         transaction_id: 'QP_VIP_' + Date.now(),
         value: 67.00,

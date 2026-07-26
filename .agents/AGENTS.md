@@ -11,7 +11,7 @@
 ## Embudo de Ventas (Funnel) - 100% Pago Único (Sin Suscripciones)
 1. **Tráfico Principal (Adquisición vs Remarketing):** 
    - **Google Ads (YouTube Video Action):** Adquisición **100% de Tráfico Frío**. El canal principal ahora es Google Ads tras pivotar hacia cumplimiento estricto ("White Hat" B2B).
-   - **Meta Ads / TikTok Ads:** Canales de contingencia o Remarketing (actualmente limitados por baneos preventivos).
+   - **Meta Ads:** Canal de contingencia o Remarketing (actualmente limitado por baneos preventivos). TikTok Ads ha sido abandonado definitivamente por baneos irreversibles.
 2. **Producto Principal (Landing `/`):** 
    - **Bóveda Base:** S/ 29.00 (Pago Único, Acceso De Por Vida).
      - Link Mercado Pago: `https://mpago.la/1YFVjgT`
@@ -63,14 +63,14 @@
 
 ## Reglas de Rendimiento Frontend (PageSpeed 90+)
 Para mantener la calificación en la zona verde (90-100) en móviles, todo código nuevo debe respetar estrictamente estas 3 reglas:
-- **Lazy Tracking Obligatorio:** PROHIBIDO inyectar píxeles de rastreo (TikTok, Meta, Google) directamente en la carga inicial (`index.html`). DEBEN envolverse en un inyector JS asíncrono gatillado por interacción (scroll/touch/mousemove) o con un timeout mínimo de 3500ms para evitar el `Render Delay` de LCP.
+- **Lazy Tracking Obligatorio:** PROHIBIDO inyectar píxeles de rastreo (Meta, Google) directamente en la carga inicial (`index.html`). DEBEN envolverse en un inyector JS asíncrono gatillado por interacción (scroll/touch/mousemove) o con un timeout mínimo de 3500ms para evitar el `Render Delay` de LCP.
 - **Hero Pre-rendering Manual:** El HTML estático (App Shell) de la sección superior (`.hero`) debe permanecer incrustado en `<div id="root">` dentro de `index.html`. Esto puentea el cuello de botella del Client-Side Rendering y garantiza un LCP inicial de ~0.1s.
 - **Aceleración GPU en CSS:** Toda animación continua o repetitiva DEBE usar `transform` o `opacity`. Está PROHIBIDO animar propiedades de redibujado intensivo (layout/paint) como `background-position`, `top`, `left`, `width` o `height`.
 
 ## Estado del Ecosistema de SOPs (Guardados en `docs/` local)
 - `SOP-QP-001`: Creación de Micro-servicios / Landings (Completado).
-- `SOP-QP-002`: Creación y Lanzamiento de TikTok Ads & Events API (Completado - Developer App en aprobación).
-- `SOP-QP-003`: Producción de Creativos Verticales Cinemáticos de 10s con IA y TikTok Symphony v2.1 (Completado).
+- `SOP-QP-002`: Creación y Lanzamiento de TikTok Ads & Events API (DEPRECATED - Plataforma Abandonada).
+- `SOP-QP-003`: Producción de Creativos Verticales Cinemáticos de 10s con IA y TikTok Symphony v2.1 (DEPRECATED - Plataforma Abandonada).
 - `SOP-QP-004`: Atención al Cliente y Reembolsos por Correo (Completado).
 - `SOP-QP-005`: Control de Métricas, CPA, Estrategia ABO S/ 20/día (48h y 5d) y Reglas de Escalamiento (v1.1 - Completado).
 - `SOP-QP-006`: Optimización Extrema PageSpeed (90+) para React SPAs (Completado).
@@ -78,8 +78,6 @@ Para mantener la calificación en la zona verde (90-100) en móviles, todo códi
 ## Estado de Conexiones de Media Buying & Píxeles (Verificado 2026-07-26)
 - **Google Ads API (100% Completo):** Credenciales en `.env.local` (`GOOGLE_ADS_CUSTOMER_ID=316-040-6729`, `CLIENT_ID`, `CLIENT_SECRET`, `DEVELOPER_TOKEN`, `REFRESH_TOKEN`). Permite lectura de métricas, gestión y creación de campañas de remarketing por script.
 - **Google Tag & Remarketing (`AW-3160406729`):** Instalado en `index.html`. Dispara `begin_checkout` (intencionados sin compra para Remarketing en Display/YouTube) y `purchase` (exclusión de compradores). Verificado en vivo en Tag Assistant.
-- **TikTok Pixel (`D9G1MPJC77U0255M8JG0`) & Events API:** 100% activo en la web (`index.html` y `App.jsx`). Dispara `LandingPageView`, `PageView`, `InitiateCheckout` y `CompletePayment` (Lookalike). Verificado en vivo en TikTok Pixel Helper (<156ms).
-- **TikTok Marketing API (Developer App):** Developer Profile enviado y en revisión por TikTok (`Your profile is currently under review`). Events API y Píxel operando al 100% para campañas manuales en `ads.tiktok.com`.
 
 ## Reglas Operativas y de Control Git
 - **Confirmación Obligatoria de Push:** SIEMPRE preguntar y solicitar autorización explícita al usuario ANTES de ejecutar `git push`.

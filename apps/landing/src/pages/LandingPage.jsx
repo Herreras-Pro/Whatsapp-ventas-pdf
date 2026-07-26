@@ -133,7 +133,7 @@ function QuizSection() {
       <div className="container">
         <div className="quiz-card">
           <div className="quiz-header-badge">📋 DIAGNÓSTICO RÁPIDO EN 60 SEGUNDOS</div>
-          <h2>Descubre tu Nivel de Pérdida de Ventas en WhatsApp</h2>
+          <h2>Descubre la Eficiencia de tu Atención por WhatsApp</h2>
           <p className="quiz-intro">Responde 3 preguntas sencillas y calcula cuánto dinero estás dejando ir hacia tu competencia.</p>
 
           {!isFinished ? (
@@ -154,10 +154,10 @@ function QuizSection() {
           ) : (
             <div className="quiz-result-box">
               <div className="result-alert-icon">🚨</div>
-              <h3>Diagnóstico: Fuga Crítica de Ventas por Falta de Guiones Anti-Visto</h3>
+              <h3>Diagnóstico: Oportunidad de Mejora en la Tasa de Respuesta</h3>
               <p>Tu producto es excelente, pero la falta de una secuencia estructurada de objeciones te está costando más del 65% de tu facturación mensual.</p>
               <button onClick={scrollToCheckout} className="cta-button pulse-btn" style={{ marginTop: '1.25rem' }}>
-                SOLUCIONAR MI FUGA DE VENTAS HOY (S/ 29)
+                SISTEMATIZAR MI ATENCIÓN HOY (S/ 29)
               </button>
             </div>
           )}
@@ -252,12 +252,12 @@ export default function LandingPage() {
       {/* HERO SECTION */}
       <section className="hero">
         <div className="container">
-          <div className="hero-badge">⚡ EL SISTEMA NÚMERO 1 EN PERÚ</div>
+          <div className="hero-badge">📦 RECURSO B2B PARA NEGOCIOS</div>
           <h1>
-            Cómo cerrar ventas por <span className="highlight">WhatsApp</span> en 5 minutos sin regalar tu trabajo ni rogar por la venta.
+            Plantillas de Comunicación por <span className="highlight">WhatsApp</span> para Sistematizar la Atención al Cliente.
           </h1>
           <p className="subtitle">
-            El sistema 'Copy-Paste' exacto que usan los negocios más rentables del Perú para fulminar objeciones, revivir clientes en visto y hacer que te paguen sin chistar.
+            El manual estructurado que utilizan los asesores comerciales en Perú para responder consultas, gestionar seguimientos y mantener un flujo de comunicación profesional.
           </p>
 
           <div className="hero-grid">
@@ -273,7 +273,7 @@ export default function LandingPage() {
 
               <div className="cta-wrapper hero-desktop-cta-wrapper">
                 <button onClick={scrollToAgitation} className="cta-button pulse-btn">
-                  QUIERO MIS GUIONES AHORA (S/ 29)
+                  ACCEDER A LAS PLANTILLAS (S/ 29)
                 </button>
                 <span className="secure-badge">🔒 Pago 100% Seguro vía Mercado Pago Perú</span>
                 <span className="guarantee-text">⏱️ Acceso Inmediato · Pago Único De Por Vida</span>

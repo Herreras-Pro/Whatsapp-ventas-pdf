@@ -10,8 +10,8 @@
 
 ## Embudo de Ventas (Funnel) - 100% Pago Único (Sin Suscripciones)
 1. **Tráfico Principal (Adquisición vs Remarketing):** 
-   - **TikTok Ads:** Adquisición **100% de Tráfico Frío** (CPC bajo ~S/ 0.20 - S/ 0.50 PEN).
-   - **Google Ads:** **100% EXCLUSIVO para Remarketing / Retargeting** (Display & YouTube) para rescatar visitas que salieron de la landing sin comprar. Prohibido usar Google Search en tráfico frío (CPC alto de S/ 3 - S/ 6 PEN destruye margen de ticket S/ 29).
+   - **Google Ads (YouTube Video Action):** Adquisición **100% de Tráfico Frío**. El canal principal ahora es Google Ads tras pivotar hacia cumplimiento estricto ("White Hat" B2B).
+   - **Meta Ads / TikTok Ads:** Canales de contingencia o Remarketing (actualmente limitados por baneos preventivos).
 2. **Producto Principal (Landing `/`):** 
    - **Bóveda Base:** S/ 29.00 (Pago Único, Acceso De Por Vida).
      - Link Mercado Pago: `https://mpago.la/1YFVjgT`

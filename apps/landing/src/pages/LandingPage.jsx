@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MP_LINKS, trackGoogleAdsEvent } from '../utils';
+import AnimatedCounter from '../components/AnimatedCounter';
 
 // === COMPONENTE WIDGET LIVE SALES (SOCIAL PROOF TOAST EN VIVO) ===
 const RECENT_SALES = [
@@ -324,19 +325,19 @@ export default function LandingPage() {
         <div className="container">
           <div className="stats-grid">
             <div className="stat-item">
-              <div className="stat-num">60+</div>
+              <div className="stat-num"><AnimatedCounter end={60} suffix="+" /></div>
               <div className="stat-lbl">Guiones Copy-Paste</div>
             </div>
             <div className="stat-item">
-              <div className="stat-num">3</div>
+              <div className="stat-num"><AnimatedCounter end={3} duration={1000} /></div>
               <div className="stat-lbl">Bonos de Regalo Gratis</div>
             </div>
             <div className="stat-item">
-              <div className="stat-num">1,200+</div>
+              <div className="stat-num"><AnimatedCounter end={1200} suffix="+" duration={2500} /></div>
               <div className="stat-lbl">Emprendedores Felices</div>
             </div>
             <div className="stat-item">
-              <div className="stat-num">100%</div>
+              <div className="stat-num"><AnimatedCounter end={100} suffix="%" duration={1500} /></div>
               <div className="stat-lbl">Pago Único Vitalicio</div>
             </div>
           </div>

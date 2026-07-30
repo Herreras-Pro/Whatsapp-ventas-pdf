@@ -4,6 +4,17 @@ Todas las modificaciones, optimizaciones de conversión (CRO), correcciones téc
 
 ---
 
+## [1.6.0] - 2026-07-29 (Creación de Conversiones Google Ads & Mapeo de Conversion Labels)
+
+### 📊 Medición & Analítica (Google Ads API & Frontend)
+- **Creación de Acción de Conversión `begin_checkout`:** Creada programáticamente la acción de conversión secundaria *"Inicio de Pago (begin_checkout)"* (ID: `7702438932`) en la sub-cuenta de Google Ads (`4433232603`).
+- **Mapeo Automático de Conversion Labels:** Actualizado `trackGoogleAdsEvent` en `apps/landing/src/utils.js` para adjuntar automáticamente las etiquetas exactas:
+  - `begin_checkout` ➔ `AW-3160406729/7702438932`
+  - `purchase` ➔ `AW-3160406729/7655382222`
+- **Compilación e Integración:** Verificado el bundle final de producción con `npm run build --workspace=apps/landing`.
+
+---
+
 ## [1.5.0] - 2026-07-26 (Optimización PageSpeed: Code Splitting & Diferimiento)
 
 ### ⚡ Rendimiento (Performance) - Fase 2 (Gemini Audit)

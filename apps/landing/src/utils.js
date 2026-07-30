@@ -8,8 +8,28 @@ export const MP_LINKS = {
 
 // === HELPER GOOGLE ADS ===
 
+export const GOOGLE_ADS_IDS = {
+  TAG_ID: 'AW-3160406729',
+  PURCHASE_LABEL: 'AW-3160406729/7655382222',
+  BEGIN_CHECKOUT_LABEL: 'AW-3160406729/7702438932'
+};
+
 export const trackGoogleAdsEvent = (eventName, params = {}) => {
   if (window.gtag && typeof window.gtag === 'function') {
-    window.gtag('event', eventName, params);
+    let sendTo = params.send_to;
+    if (!sendTo) {
+      if (eventName === 'purchase') {
+        sendTo = GOOGLE_ADS_IDS.PURCHASE_LABEL;
+      } else if (eventName === 'begin_checkout') {
+        sendTo = GOOGLE_ADS_IDS.BEGIN_CHECKOUT_LABEL;
+      } else {
+        sendTo = GOOGLE_ADS_IDS.TAG_ID;
+      }
+    }
+
+    window.gtag('event', eventName, {
+      send_to: sendTo,
+      ...params
+    });
   }
 };

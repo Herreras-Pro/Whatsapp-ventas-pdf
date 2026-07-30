@@ -4,6 +4,15 @@ Todas las modificaciones, optimizaciones de conversión (CRO), correcciones téc
 
 ---
 
+## [1.7.0] - 2026-07-29 (Pausa de YouTube Shorts, Actualización a SOP-QP-007 v2.0 & Message-Match Search)
+
+### 📊 Paid Media & Estrategia (Google Ads)
+- **Pausa de Campaña YouTube Shorts:** Pausada formalmente la campaña `24073229418` en S/ 34.32 PEN tras validar baja intención de compra en formatos pasivos de video corto.
+- **SOP-QP-007 v2.0 (Google Search B2B):** Creado y formalizado el nuevo SOP en `docs/SOP_Estrategia_Google_Search.md` con los 4 blindajes anti-fugas (desactivación de partners/display, presencia física estricta en Perú, límite Max CPC S/ 1.50 y negativas anti-gratis).
+- **Alineación de Landing (Message Match):** Actualizado el titular `<h1>` y subtítulo del Hero en `index.html` y `LandingPage.jsx` hacia *"Bóveda de Guiones y Respuestas de Venta por WhatsApp (60+ Plantillas para Cerrar Clientes)"*.
+
+---
+
 ## [1.6.0] - 2026-07-29 (Creación de Conversiones Google Ads & Mapeo de Conversion Labels)
 
 ### 📊 Medición & Analítica (Google Ads API & Frontend)

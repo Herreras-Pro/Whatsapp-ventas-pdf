@@ -249,10 +249,10 @@ export default function LandingPage() {
         <div className="container">
           <div className="hero-badge">📦 RECURSO B2B PARA NEGOCIOS</div>
           <h1>
-            Plantillas de Comunicación por <span className="highlight">WhatsApp</span> para Sistematizar la Atención al Cliente.
+            Bóveda de Guiones y Respuestas de Venta por <span className="highlight">WhatsApp</span> (60+ Plantillas para Cerrar Clientes).
           </h1>
           <p className="subtitle">
-            El manual estructurado que utilizan los asesores comerciales en Perú para responder consultas, gestionar seguimientos y mantener un flujo de comunicación profesional.
+            El manual B2B estructurado que utilizan emprendedores en Perú para responder objeciones ("está caro", "déjame pensarlo") y cerrar ventas sin perder clientes en visto.
           </p>
 
           <div className="hero-grid">

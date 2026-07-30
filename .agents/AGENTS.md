@@ -10,7 +10,7 @@
 
 ## Embudo de Ventas (Funnel) - 100% Pago Único (Sin Suscripciones)
 1. **Tráfico Principal (Adquisición vs Remarketing):** 
-   - **Google Ads (YouTube Video Action):** Adquisición **100% de Tráfico Frío**. El canal principal ahora es Google Ads tras pivotar hacia cumplimiento estricto ("White Hat" B2B).
+   - **Google Ads Search (Red de Búsqueda):** Adquisición **100% de Tráfico de Alta Intención Comercial**. Tras pausar la campaña de YouTube Shorts por baja intención, el canal principal es Google Search orientando palabras de cola larga en Perú (SOP-QP-007 v2.0).
    - **Meta Ads:** Canal de contingencia o Remarketing (actualmente limitado por baneos preventivos). TikTok Ads ha sido abandonado definitivamente por baneos irreversibles.
 2. **Producto Principal (Landing `/`):** 
    - **Bóveda Base:** S/ 29.00 (Pago Único, Acceso De Por Vida).
